@@ -27,16 +27,16 @@ function guardar(){
     const translateY = matrix.m42;
     const translateZ = matrix.m43;
     console.log(`translateX: ${translateX}, translateY: ${translateY}, translateZ: ${translateZ}`);
-    // Crea la animación
     if(translateX == -150 && translateY == 0){
         gsap.to("#red-box", {
-            y: translateY- 20, // Mueve la caja roja 50px hacia arriba
-            duration: 1, // Duración de 1 segundo
-            onComplete: function() { // Función que se ejecuta cuando termina la primera animación
+            opacity: 1,
+            y: translateY- 20,
+            duration: 1,
+            onComplete: function() {
                 gsap.to("#red-box", {
-                    y: translateY+10, // Mueve la caja roja a su posición original
+                    y: translateY+10,
                     opacity: 0,
-                    duration: 1, // Duración de 1 segundo
+                    duration: 1,
                     onComplete: function() { 
                         element.classList.add("hidden");
                     }, 
@@ -48,9 +48,25 @@ function guardar(){
 
 function recargar(){
     const element = document.querySelector("#red-box");
-    element.style.transform = ``;
-    element.style.transform = `translate3d(0px, 0px, 0px)`;
+    const transform = window.getComputedStyle(element).getPropertyValue("transform");
+    const matrix = new DOMMatrixReadOnly(transform);
+    const translateX = matrix.m41;
+    const translateY = matrix.m42;
+    const translateZ = matrix.m43;
+    console.log(`translateX: ${translateX}, translateY: ${translateY}, translateZ: ${translateZ}`);
     element.classList.remove("hidden");
+    gsap.to("#red-box", {
+        y: translateY- 20,
+        duration: 1,
+        opacity: 1,
+        onComplete: function() {
+            gsap.to("#red-box", {
+                y: 0,
+                x: 0,
+                duration: 1,
+            });
+        }, 
+    });
 }
 
 gsap.to(".box", {
