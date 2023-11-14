@@ -18,6 +18,7 @@ Draggable.create("#red-box", {
     onDrag: function() {
         if (this.hitTest(".wall")) {
             this.endDrag();
+            this.
             recargar();
         }
         if (this.hitTest("#rotator1")) {

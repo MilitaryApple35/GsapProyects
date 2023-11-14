@@ -1,3 +1,4 @@
+
 body {
     display: block;
     justify-content: center;
@@ -9,6 +10,7 @@ body {
     font-size: 2em;
     text-align: center;
     padding-bottom: 50px;
+    overflow-x: hidden;
 }
 #big-box {
     width: 500px;
@@ -146,5 +148,29 @@ body {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    -o-border-radius: 10p.x;
+}
+
+.loading-back{
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 10vh;
+    overflow: hidden;
+    z-index: 1000px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
