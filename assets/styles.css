@@ -21,12 +21,15 @@ body {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .box-container{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 .box{
     display: flex;
@@ -71,12 +74,77 @@ body {
 .hidden{
     display: none;
 }
+
+#wall1{
+    width: 20px;
+    height: 300px;
+    background-color: #0e100f;
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    z-index: 999;
+}
+
+.titulo{
+    background-color: #fffce1;
+    color: #0e100f;
+}
+
+.rotator{
+    width: 10px;
+    height: 100px;
+    background-color: #0e100f;
+    position: absolute;
+    
+    z-index: 999;
+}
+#rotator1{
+    top: 0px;
+    left: 205px;
+}
+
+#rotator2{
+    top: 400px;
+    left: 205px;
+}
+
 #red-box {
     width: 20px;
     height: 20px;
     background-color: red;
-    border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.back{
+    z-index: -999;
+    background-color: #fffce1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 71vh;
+    width: 100%;
+    position: absolute;
+    top: 38vh;
+    left: 0;
+    
+}
+.back-cube{
+    width: 100px;
+    height: 100px;
+    background-color: #0e100f;
+    z-index: -100;
+    border-radius: 10px;
+    top: 65vh;
+    display: flex;
+    position: absolute;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }

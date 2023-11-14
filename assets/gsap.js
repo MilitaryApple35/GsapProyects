@@ -6,7 +6,7 @@ gsap.registerPlugin(Draggable, TextPlugin, ScrollTrigger);
 
 Draggable.create("#red-box", {
     type: "x,y",
-    edgeResistance: 0.65,
+    edgeResistance: 1,
     bounds: "#big-box",
     throwProps: true,
     liveSnap:{
@@ -14,6 +14,20 @@ Draggable.create("#red-box", {
             { x: -150, y: 0 },
         ],
         radius: 20,
+    },
+    onDrag: function() {
+        if (this.hitTest(".wall")) {
+            this.endDrag();
+            recargar();
+        }
+        if (this.hitTest("#rotator1")) {
+            this.endDrag();
+            recargar();
+        }
+        if (this.hitTest("#rotator2")) {
+            this.endDrag();
+            recargar();
+        }
     },
     onRelease: guardar,
     inertia: true,
@@ -78,10 +92,28 @@ gsap.to(".box", {
         toggleActions: "restart pause resume reset",
         triggerOnce: false,
     },
+    ease: "none",
     rotation: 360,
     repeat: -1,
     duration: 2,
 });
+
+gsap.to(".rotator", {
+    rotation: 360,
+    ease: "none",
+    repeat: -1,
+    duration: 2,
+});
+
+gsap.to(".back-cube",{
+    ease: "power4.inOut",
+    x: window.innerWidth - 115,
+    duration: 3,
+    yoyo: true,
+    repeat: -1,
+});
+
+
 
 setTimeout(() => {
     gsap.to("#text", {
