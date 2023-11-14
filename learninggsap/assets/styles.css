@@ -22,15 +22,6 @@ body {
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
 }
-#red-box {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
 .box-container{
     width: 100%;
     display: flex;
@@ -64,6 +55,28 @@ body {
     width: 50px;
 }
 
+.btn-refresh{
+    color: #fffce1;
+    font-size: large;
+    background-color: #0e100f;
+    border: 3px solid #fffce1;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+
 .hidden{
     display: none;
+}
+#red-box {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }

@@ -48,12 +48,8 @@ function guardar(){
 
 function recargar(){
     const element = document.querySelector("#red-box");
-    const transform = window.getComputedStyle(element).getPropertyValue("transform");
-    const matrix = new DOMMatrixReadOnly(transform);
-    const translateX = matrix.m41;
-    const translateY = matrix.m42;
-    const translateZ = matrix.m43;
-    element.style.transform = `translate3d(${translateX + 100}px, ${translateY + 100}px, ${translateZ + 100}px)`;
+    element.style.transform = ``;
+    element.style.transform = `translate3d(0px, 0px, 0px)`;
     element.classList.remove("hidden");
 }
 
@@ -78,3 +74,5 @@ setTimeout(() => {
         ease: "none",
     });
 }, 3000);
+
+document.getElementById("recargar").addEventListener("click", recargar);
