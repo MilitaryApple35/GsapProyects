@@ -9,15 +9,53 @@ Draggable.create("#red-box", {
     edgeResistance: 0.65,
     bounds: "#big-box",
     throwProps: true,
-    liveSnap: {
+    liveSnap:{
         points: [
-            { x: -150, y: -150 },
-            { x: 150, y: 150 },
+            { x: -150, y: 0 },
         ],
         radius: 20,
     },
+    onRelease: guardar,
     inertia: true,
 });
+
+function guardar(){
+    const element = document.querySelector("#red-box");
+    const transform = window.getComputedStyle(element).getPropertyValue("transform");
+    const matrix = new DOMMatrixReadOnly(transform);
+    const translateX = matrix.m41;
+    const translateY = matrix.m42;
+    const translateZ = matrix.m43;
+    console.log(`translateX: ${translateX}, translateY: ${translateY}, translateZ: ${translateZ}`);
+    // Crea la animación
+    if(translateX == -150 && translateY == 0){
+        gsap.to("#red-box", {
+            y: translateY- 20, // Mueve la caja roja 50px hacia arriba
+            duration: 1, // Duración de 1 segundo
+            onComplete: function() { // Función que se ejecuta cuando termina la primera animación
+                gsap.to("#red-box", {
+                    y: translateY+10, // Mueve la caja roja a su posición original
+                    opacity: 0,
+                    duration: 1, // Duración de 1 segundo
+                    onComplete: function() { 
+                        element.classList.add("hidden");
+                    }, 
+                });
+            },
+        });
+    }
+}
+
+function recargar(){
+    const element = document.querySelector("#red-box");
+    const transform = window.getComputedStyle(element).getPropertyValue("transform");
+    const matrix = new DOMMatrixReadOnly(transform);
+    const translateX = matrix.m41;
+    const translateY = matrix.m42;
+    const translateZ = matrix.m43;
+    element.style.transform = `translate3d(${translateX + 100}px, ${translateY + 100}px, ${translateZ + 100}px)`;
+    element.classList.remove("hidden");
+}
 
 gsap.to(".box", {
     scrollTrigger: {
@@ -32,6 +70,7 @@ gsap.to(".box", {
     repeat: -1,
     duration: 2,
 });
+
 setTimeout(() => {
     gsap.to("#text", {
         duration: 0.75,
