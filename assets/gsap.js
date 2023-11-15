@@ -31,7 +31,6 @@ Draggable.create("#red-box", {
         }
     },
     onRelease: guardar,
-    inertia: true,
 });
 
 function guardar(){
@@ -114,7 +113,37 @@ gsap.to(".back-cube",{
     repeat: -1,
 });
 
+gsap.to(".loading",{
+    rotation: 360,
+    ease: "none",
+    repeat: -1,
+    duration: 2,
+});
 
+function finishLoading(){
+    gsap.to(".loading-back",{
+        backgroundColor: "rgba(0, 0, 0, 0.000001)",
+        duration: 1,
+        onComplete: function() {
+            setTimeout(() => {
+                gsap.to(".loading",{
+                    opacity: 0,
+                    duration: 5,
+                    onComplete: function() {
+                        gsap.killTweensOf(".loading");
+                        gsap.killTweensOf(".loading-back");
+                        gsap.to(".loading-back",{
+                            display: "none",
+                        });
+                        gsap.to(".loading",{
+                            display: "none",
+                        });
+                    },
+                });
+            }, 3000);
+        },
+    });
+}
 
 setTimeout(() => {
     gsap.to("#text", {
@@ -122,6 +151,7 @@ setTimeout(() => {
         text: "Prueba ya!",
         ease: "none",
     });
+    finishLoading();
 }, 3000);
 
 document.getElementById("recargar").addEventListener("click", recargar);
