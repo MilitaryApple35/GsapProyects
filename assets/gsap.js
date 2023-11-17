@@ -9,28 +9,41 @@ Draggable.create("#red-box", {
     edgeResistance: 1,
     bounds: "#big-box",
     throwProps: true,
-    liveSnap:{
-        points: [
-            { x: -150, y: 0 },
-        ],
-        radius: 20,
+    zIndexBoost: false,
+    
+    onRelease: function() {
+        if(this.hitTest("#snap-point-1")){
+            this.endDrag();
+            const cont = document.querySelector("#snap-point-1");
+            const dot = document.querySelector("#red-box");
+            const disFTDot = dot.offsetTop;
+            const disFLDot = dot.offsetLeft;
+            const disFT = cont.offsetTop;
+            const disFL = cont.offsetLeft;
+            const heightC = cont.offsetHeight;
+            const widthC = cont.offsetWidth;
+            const heightDot = dot.offsetHeight;
+            const widthDot = dot.offsetWidth;
+            const offsetX = disFL-disFLDot + widthC/2 - widthDot/2;
+            const offsetY = disFT-disFTDot + heightC/2 - heightDot/2;
+            gsap.to("#red-box", {
+                x: offsetX,
+                y: offsetY-30,
+                duration: 1,
+                onComplete: function() {
+                    gsap.to("#red-box", {
+                        y: offsetY,
+                        opacity: 0,
+                        duration: 1,
+                        onComplete: function() { 
+                            dot.classList.add("hidden");
+                        },
+                    });
+                },
+            }); 
+            
+        }
     },
-    onDrag: function() {
-        if (this.hitTest(".wall")) {
-            this.endDrag();
-            this.
-            recargar();
-        }
-        if (this.hitTest("#rotator1")) {
-            this.endDrag();
-            recargar();
-        }
-        if (this.hitTest("#rotator2")) {
-            this.endDrag();
-            recargar();
-        }
-    },
-    onRelease: guardar,
 });
 
 function guardar(){
@@ -98,11 +111,41 @@ gsap.to(".box", {
     duration: 2,
 });
 
-gsap.to(".rotator", {
-    rotation: 360,
+let a =gsap.to(".rotator", {
+    rotation: -90,
     ease: "none",
-    repeat: -1,
-    duration: 2,
+    duration: 1,
+    onComplete: function() {
+        setTimeout(() => {
+            gsap.to(".rotator", {
+                rotation: -180,
+                ease: "none",
+                duration: 1,
+                onComplete: function() {
+                    setTimeout(() => {
+                        gsap.to(".rotator", {   
+                            rotation: -270,
+                            ease: "none",
+                            duration: 1,
+                            onComplete: function() {
+                                setTimeout(() => {
+                                    gsap.to(".rotator", {
+                                        rotation: -360,
+                                        ease: "none",
+                                        duration: 1,
+                                        onComplete: function() {
+                                            setTimeout(() => {a.restart();}, 3000);
+                                        }
+                                    });
+                                }, 3000);
+                            }
+                        });
+                    }, 3000);
+                }   
+            });
+        }, 3000);
+    },
+    yoyo: true,
 });
 
 gsap.to(".back-cube",{

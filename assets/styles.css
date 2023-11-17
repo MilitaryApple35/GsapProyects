@@ -52,7 +52,7 @@ body {
     align-self: center;
     left: 85px; 
     top: 240px;
-    z-index: 100;
+    z-index: 999;
 }
 #icon{
     z-index: 99999;
@@ -71,6 +71,8 @@ body {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     cursor: pointer;
+    --button-stroke: #fffce1;
+    --button-hoverColor: #0e100f;
 }
 
 .hidden{
@@ -97,7 +99,6 @@ body {
     height: 100px;
     background-color: #0e100f;
     position: absolute;
-    
     z-index: 999;
 }
 #rotator1{
@@ -122,6 +123,7 @@ body {
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+    z-index: 999;
 }
 .back{
     z-index: -999;
